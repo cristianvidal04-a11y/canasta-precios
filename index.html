@@ -14,16 +14,13 @@
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
-/* HEADER */
-header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;gap:12px}
-header svg{color:var(--blue)}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 16px;height:56px;display:flex;align-items:center;gap:12px}
 header h1{font-size:16px;font-weight:600;flex:1}
-.source-badge{font-size:11px;background:var(--blue-light);color:var(--blue);padding:3px 10px;border-radius:20px;font-weight:500}
+.source-badge{font-size:11px;background:var(--blue-light);color:var(--blue);padding:3px 10px;border-radius:20px;font-weight:500;white-space:nowrap}
+.menu-btn{display:none;background:var(--blue);color:#fff;border:none;border-radius:var(--radius-sm);padding:7px 12px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
 
-/* LAYOUT */
 .layout{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 56px)}
 
-/* SIDEBAR */
 .sidebar{background:var(--surface);border-right:1px solid var(--border);padding:16px;overflow-y:auto}
 .sidebar-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
 .category{margin-bottom:4px}
@@ -36,166 +33,176 @@ header h1{font-size:16px;font-weight:600;flex:1}
 .prod-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--muted);transition:all .15s}
 .prod-item:hover{background:var(--bg);color:var(--text)}
 .prod-item.active{color:var(--blue);font-weight:500}
-.prod-item .dot{width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor;flex-shrink:0;transition:background .15s}
+.prod-item .dot{width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor;flex-shrink:0}
 .prod-item.active .dot{background:var(--blue);border-color:var(--blue)}
 
-/* MAIN */
-.main{padding:20px 24px;overflow-y:auto}
-.loc-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+/* DRAWER MOBILE */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:10}
+.overlay.open{display:block}
+.drawer{position:fixed;top:0;left:-300px;width:280px;height:100vh;background:var(--surface);z-index:11;padding:16px;overflow-y:auto;transition:left .25s;box-shadow:2px 0 12px rgba(0,0,0,.1)}
+.drawer.open{left:0}
+.drawer-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.drawer-header span{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.close-btn{background:none;border:none;cursor:pointer;font-size:20px;color:var(--muted);line-height:1}
+
+.main{padding:16px;overflow-y:auto}
+.loc-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .loc-bar label{font-size:13px;font-weight:500;color:var(--muted);white-space:nowrap}
-.loc-bar input{width:160px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;color:var(--text);outline:none}
+.loc-bar input{width:130px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;color:var(--text);outline:none}
 .loc-bar input:focus{border-color:var(--blue)}
 .btn{padding:7px 14px;border-radius:var(--radius-sm);border:none;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s}
-.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#1d4ed8}
-.btn-outline{background:#fff;border:1px solid var(--border);color:var(--text)}.btn-outline:hover{background:var(--bg)}
-.btn:disabled{opacity:.5;cursor:default}
+.btn-outline{background:#fff;border:1px solid var(--border);color:var(--text)}
+.btn-outline:hover{background:var(--bg)}
 
-/* PRODUCT HEADER */
-.prod-header{margin-bottom:16px}
-.prod-header h2{font-size:18px;font-weight:600;margin-bottom:4px}
+.prod-header{margin-bottom:14px}
+.prod-header h2{font-size:17px;font-weight:600;margin-bottom:3px}
 .prod-header p{font-size:13px;color:var(--muted)}
 
-/* SUMMARY CARDS */
-.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.sum-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
-.sum-card .label{font-size:11px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
-.sum-card .value{font-size:20px;font-weight:600}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.sum-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
+.sum-card .label{font-size:10px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.sum-card .value{font-size:17px;font-weight:600}
+.sum-card .sub{font-size:11px;color:var(--muted);margin-top:2px}
 .sum-card.green .value{color:var(--green)}
 .sum-card.red .value{color:var(--red)}
 .sum-card.blue .value{color:var(--blue)}
 
-/* TABLE */
-.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-table{width:100%;border-collapse:collapse}
-th{background:var(--bg);padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border)}
-td{padding:13px 16px;font-size:14px;border-bottom:1px solid var(--bg)}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:420px}
+th{background:var(--bg);padding:10px 12px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border)}
+td{padding:12px;font-size:13px;border-bottom:1px solid var(--bg)}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:#fcfcfb}
 .cadena-tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;background:var(--bg);color:var(--muted)}
-.price-cell{font-weight:600;font-size:15px;white-space:nowrap}
-.diff-tag{font-size:11px;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:500}
+.price-cell{font-weight:600;font-size:14px;white-space:nowrap}
+.diff-tag{font-size:11px;padding:2px 5px;border-radius:4px;margin-left:4px;font-weight:500}
 .diff-green{background:var(--green-light);color:var(--green)}
 .diff-red{background:var(--red-light);color:var(--red)}
-.rank{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
+.rank{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
 .rank-1{background:var(--amber-light);color:var(--amber)}
 .rank-n{background:var(--bg);color:var(--muted)}
 
-/* EMPTY */
-.empty{text-align:center;padding:60px 20px;color:var(--muted)}
-.empty svg{margin-bottom:12px;opacity:.3}
-.empty p{font-size:14px}
+.empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.empty p{font-size:14px;margin-top:10px}
 
-/* STATUS */
-.status{font-size:13px;padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:14px}
+.status{font-size:13px;padding:10px 12px;border-radius:var(--radius-sm);margin-bottom:12px}
 .status.warn{background:var(--amber-light);color:var(--amber)}
 .status.err{background:var(--red-light);color:var(--red)}
 .status.ok{background:var(--green-light);color:var(--green)}
-.spin{display:inline-block;width:13px;height:13px;border:2px solid #ccc;border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:middle}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid #ccc;border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;margin-right:5px;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media(max-width:640px){
   .layout{grid-template-columns:1fr}
   .sidebar{display:none}
+  .menu-btn{display:flex;align-items:center;gap:6px}
   .summary{grid-template-columns:1fr 1fr}
+  .sum-card:last-child{grid-column:1/-1}
 }
 </style>
 </head>
 <body>
 
 <header>
-  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8">
-    <path d="M7 2L4 6v13a2 2 0 002 2h10a2 2 0 002-2V6l-3-4H7z"/>
-    <line x1="4" y1="6" x2="18" y2="6"/>
-    <path d="M14.5 11a3.5 3.5 0 01-7 0"/>
-  </svg>
-  <h1>Comparador de canasta básica</h1>
-  <span class="source-badge">Fuente: Precios Claros · SEPA</span>
+  <svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="var(--blue)" stroke-width="1.8"><path d="M7 2L4 6v13a2 2 0 002 2h10a2 2 0 002-2V6l-3-4H7z"/><line x1="4" y1="6" x2="18" y2="6"/><path d="M14.5 11a3.5 3.5 0 01-7 0"/></svg>
+  <h1>Canasta básica</h1>
+  <span class="source-badge">Precios Claros</span>
+  <button class="menu-btn" onclick="openDrawer()">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="3" x2="13" y2="3"/><line x1="1" y1="7" x2="13" y2="7"/><line x1="1" y1="11" x2="13" y2="11"/></svg>
+    Productos
+  </button>
 </header>
 
+<!-- Desktop sidebar -->
 <div class="layout">
   <aside class="sidebar">
     <div class="sidebar-title">Canasta básica</div>
     <div id="catList"></div>
   </aside>
-
   <main class="main">
     <div class="loc-bar">
-      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--muted)" stroke-width="1.5"><circle cx="7.5" cy="6" r="2.5"/><path d="M7.5 1C4.46 1 2 3.46 2 6.5c0 3.5 5.5 8.5 5.5 8.5s5.5-5 5.5-8.5C13 3.46 10.54 1 7.5 1z"/></svg>
+      <svg width="14" height="14" viewBox="0 0 15 15" fill="none" stroke="var(--muted)" stroke-width="1.5"><circle cx="7.5" cy="6" r="2.5"/><path d="M7.5 1C4.46 1 2 3.46 2 6.5c0 3.5 5.5 8.5 5.5 8.5s5.5-5 5.5-8.5C13 3.46 10.54 1 7.5 1z"/></svg>
       <label>Lat</label>
       <input type="number" id="lat" value="-34.6037" step="0.001">
       <label>Lng</label>
       <input type="number" id="lng" value="-58.3816" step="0.001">
-      <button class="btn btn-outline" onclick="geolocate()">📍 Mi ubicación</button>
+      <button class="btn btn-outline" onclick="geolocate()">📍 Ubicación</button>
     </div>
-
     <div id="statusBar"></div>
-
     <div id="mainContent">
       <div class="empty">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6L6 14v20l14 8 14-8V14L20 6z"/><path d="M6 14l14 8M20 22v22M34 14l-14 8"/></svg>
-        <p>Seleccioná un producto del panel izquierdo para ver los precios comparados por sucursal.</p>
+        <svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6L6 14v20l14 8 14-8V14L20 6z"/><path d="M6 14l14 8M20 22v22M34 14l-14 8"/></svg>
+        <p>Seleccioná un producto para ver los precios por sucursal.</p>
       </div>
     </div>
   </main>
 </div>
 
-<script>
-const PROXY = '/api/precios';
-const BASE_DEMO = 'demo';
+<!-- Mobile drawer -->
+<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <span>Canasta básica</span>
+    <button class="close-btn" onclick="closeDrawer()">×</button>
+  </div>
+  <div id="catListMobile"></div>
+</div>
 
-const CANASTA = [
-  {cat:'🥛 Lácteos', items:[
+<script>
+const PROXY='/api/precios';
+const CANASTA=[
+  {cat:'🥛 Lácteos',items:[
     {id:'7790070000001',nombre:'Leche entera 1L',marca:'La Serenísima'},
     {id:'7790070000002',nombre:'Leche entera 1L',marca:'Sancor'},
     {id:'7791290000001',nombre:'Yogur entero 190g',marca:'Danone'},
     {id:'7790040000001',nombre:'Queso cremoso 200g',marca:'La Paulina'},
   ]},
-  {cat:'🍞 Panificados', items:[
+  {cat:'🍞 Panificados',items:[
     {id:'7790170000001',nombre:'Pan lactal blanco 500g',marca:'Bimbo'},
     {id:'7790170000002',nombre:'Pan lactal integral 500g',marca:'Fargo'},
     {id:'7791290000010',nombre:'Galletitas de agua 200g',marca:'Bagley'},
   ]},
-  {cat:'🛢️ Aceites y grasas', items:[
+  {cat:'🛢️ Aceites',items:[
     {id:'7790200000001',nombre:'Aceite de girasol 900ml',marca:'Cocinero'},
     {id:'7790200000002',nombre:'Aceite de girasol 900ml',marca:'Natura'},
     {id:'7790200000003',nombre:'Aceite de maíz 900ml',marca:'Mazola'},
   ]},
-  {cat:'🌾 Harinas y arroz', items:[
+  {cat:'🌾 Harinas y arroz',items:[
     {id:'7790540000001',nombre:'Harina 000 1kg',marca:'Cañuelas'},
     {id:'7790540000002',nombre:'Arroz largo fino 1kg',marca:'Gallo'},
     {id:'7790540000003',nombre:'Fideos spaghetti 500g',marca:'Matarazzo'},
     {id:'7790540000004',nombre:'Polenta 500g',marca:'Presto Pronta'},
   ]},
-  {cat:'☕ Infusiones', items:[
+  {cat:'☕ Infusiones',items:[
     {id:'7790110000001',nombre:'Yerba mate 1kg',marca:'Taragüi'},
     {id:'7790110000002',nombre:'Yerba mate 1kg',marca:'Playadito'},
     {id:'7790120000001',nombre:'Café molido 250g',marca:'La Virginia'},
     {id:'7790120000002',nombre:'Té negro x20',marca:'Lipton'},
   ]},
-  {cat:'🍬 Azúcar y dulces', items:[
+  {cat:'🍬 Azúcar y dulces',items:[
     {id:'7790620000001',nombre:'Azúcar común 1kg',marca:'Ledesma'},
     {id:'7790620000002',nombre:'Mermelada frutilla 454g',marca:'Arcor'},
   ]},
-  {cat:'🧴 Higiene', items:[
+  {cat:'🧴 Higiene',items:[
     {id:'7791290000020',nombre:'Jabón tocador 125g',marca:'Dove'},
     {id:'7791290000021',nombre:'Papel higiénico x4',marca:'Elite'},
     {id:'7791290000022',nombre:'Pasta dental 90g',marca:'Colgate'},
   ]},
 ];
 
-let sucursales=[], openCat=null, currentProd=null;
+let currentProd=null;
 
-function buildSidebar(){
-  const c=document.getElementById('catList');
+function buildSidebar(containerId,mobile){
+  const c=document.getElementById(containerId);
   c.innerHTML=CANASTA.map((cat,ci)=>`
     <div class="category">
-      <div class="cat-header" onclick="toggleCat(${ci})" id="cath-${ci}">
+      <div class="cat-header" onclick="toggleCat('${containerId}',${ci})" id="${containerId}-cath-${ci}">
         <span>${cat.cat} <span class="cat-count">(${cat.items.length})</span></span>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4.5l3 3 3-3"/></svg>
       </div>
-      <div class="cat-products" id="catp-${ci}">
+      <div class="cat-products" id="${containerId}-catp-${ci}">
         ${cat.items.map((p,pi)=>`
-          <div class="prod-item" onclick="selectProd(${ci},${pi})" id="prod-${ci}-${pi}">
+          <div class="prod-item" onclick="selectProd(${ci},${pi},${mobile})" id="${containerId}-prod-${ci}-${pi}">
             <span class="dot"></span>${p.nombre}
           </div>
         `).join('')}
@@ -204,20 +211,33 @@ function buildSidebar(){
   `).join('');
 }
 
-function toggleCat(ci){
-  const h=document.getElementById('cath-'+ci);
-  const p=document.getElementById('catp-'+ci);
+function toggleCat(containerId,ci){
+  const h=document.getElementById(`${containerId}-cath-${ci}`);
+  const p=document.getElementById(`${containerId}-catp-${ci}`);
   const isOpen=p.classList.contains('open');
-  document.querySelectorAll('.cat-header').forEach(x=>x.classList.remove('open'));
-  document.querySelectorAll('.cat-products').forEach(x=>x.classList.remove('open'));
+  document.querySelectorAll(`#${containerId} .cat-header`).forEach(x=>x.classList.remove('open'));
+  document.querySelectorAll(`#${containerId} .cat-products`).forEach(x=>x.classList.remove('open'));
   if(!isOpen){h.classList.add('open');p.classList.add('open')}
 }
 
-function selectProd(ci,pi){
-  document.querySelectorAll('.prod-item').forEach(x=>x.classList.remove('active'));
-  document.getElementById('prod-'+ci+'-'+pi).classList.add('active');
+function selectProd(ci,pi,mobile){
   currentProd=CANASTA[ci].items[pi];
+  ['catList','catListMobile'].forEach(id=>{
+    document.querySelectorAll(`#${id} .prod-item`).forEach(x=>x.classList.remove('active'));
+    const el=document.getElementById(`${id}-prod-${ci}-${pi}`);
+    if(el)el.classList.add('active');
+  });
+  if(mobile)closeDrawer();
   cargar(currentProd);
+}
+
+function openDrawer(){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
 }
 
 function setStatus(msg,type=''){
@@ -235,27 +255,25 @@ function geolocate(){
 }
 
 async function cargar(prod){
-  setStatus('<span class="spin"></span>Buscando sucursales y precios...','');
+  setStatus('<span class="spin"></span>Buscando precios...','');
   document.getElementById('mainContent').innerHTML='';
   const lat=document.getElementById('lat').value;
   const lng=document.getElementById('lng').value;
-
   try{
-    // Intentar API real via proxy
     const r=await fetch(`${PROXY}?lat=${lat}&lng=${lng}&id=${prod.id}`,{signal:AbortSignal.timeout(5000)});
-    if(!r.ok)throw new Error('proxy');
+    if(!r.ok)throw new Error();
     const d=await r.json();
     setStatus('');
     renderTabla(prod,d.sucursales);
   }catch{
-    setStatus('⚠️ Usando datos de demostración — para datos reales deploy con el backend Vercel incluido.','warn');
+    setStatus('⚠️ Mostrando datos de demostración.','warn');
     renderDemo(prod);
   }
 }
 
 const CADENAS=['Carrefour','Coto','Día','La Anónima','Walmart','Jumbo','Disco','Vea','Changomas'];
-const BARRIOS=['Palermo','Belgrano','Caballito','Flores','Almagro','Recoleta','Balvanera','Villa Crespo','Núñez'];
-const CALLES=['Corrientes','Rivadavia','Cabildo','Santa Fe','Callao','Córdoba','Las Heras','Scalabrini Ortiz'];
+const BARRIOS=['Palermo','Belgrano','Caballito','Flores','Almagro','Recoleta','Balvanera','Villa Crespo'];
+const CALLES=['Corrientes','Rivadavia','Cabildo','Santa Fe','Callao','Córdoba'];
 
 function renderDemo(prod){
   const base=800+Math.round(Math.random()*1200);
@@ -270,59 +288,55 @@ function renderDemo(prod){
 
 function renderTabla(prod,rows){
   if(!rows||!rows.length){
-    document.getElementById('mainContent').innerHTML='<div class="empty"><p>No se encontraron precios para este producto.</p></div>';
+    document.getElementById('mainContent').innerHTML='<div class="empty"><p>No se encontraron precios.</p></div>';
     return;
   }
-  const min=rows[0].precio, max=rows[rows.length-1].precio;
-  const ahorro=max-min;
-  const prom=Math.round(rows.reduce((a,r)=>a+r.precio,0)/rows.length);
-
+  const min=rows[0].precio,max=rows[rows.length-1].precio,ahorro=max-min;
   document.getElementById('mainContent').innerHTML=`
     <div class="prod-header">
       <h2>${prod.nombre}</h2>
-      <p>${prod.marca} · ${rows.length} sucursales encontradas</p>
+      <p>${prod.marca} · ${rows.length} sucursales</p>
     </div>
     <div class="summary">
       <div class="sum-card green">
-        <div class="label">Precio más bajo</div>
+        <div class="label">Más barato</div>
         <div class="value">$${min.toLocaleString('es-AR')}</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">${rows[0].nombre}</div>
+        <div class="sub">${rows[0].cadena}</div>
       </div>
       <div class="sum-card red">
-        <div class="label">Precio más alto</div>
+        <div class="label">Más caro</div>
         <div class="value">$${max.toLocaleString('es-AR')}</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">${rows[rows.length-1].nombre}</div>
+        <div class="sub">${rows[rows.length-1].cadena}</div>
       </div>
       <div class="sum-card blue">
         <div class="label">Ahorro posible</div>
         <div class="value">$${ahorro.toLocaleString('es-AR')}</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">${Math.round(ahorro/max*100)}% de diferencia</div>
+        <div class="sub">${Math.round(ahorro/max*100)}% diferencia</div>
       </div>
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>#</th><th>Sucursal</th><th>Cadena</th><th>Dirección</th><th>Precio</th></tr></thead>
+        <thead><tr><th>#</th><th>Sucursal</th><th>Cadena</th><th>Precio</th></tr></thead>
         <tbody>
           ${rows.map((r,i)=>{
             const diff=i===0?null:((r.precio-min)/min*100).toFixed(1);
             return `<tr>
               <td><span class="rank ${i===0?'rank-1':'rank-n'}">${i+1}</span></td>
-              <td style="font-weight:500">${r.nombre||r.dir}</td>
+              <td style="font-weight:500">${r.nombre}</td>
               <td><span class="cadena-tag">${r.cadena||''}</span></td>
-              <td style="color:var(--muted);font-size:13px">${r.dir||r.direccion||''}</td>
               <td class="price-cell" style="color:${i===0?'var(--green)':i===rows.length-1?'var(--red)':'var(--text)'}">
                 $${r.precio.toLocaleString('es-AR')}
-                ${diff?`<span class="diff-tag diff-red">+${diff}%</span>`:'<span class="diff-tag diff-green">mejor precio</span>'}
+                ${diff?`<span class="diff-tag diff-red">+${diff}%</span>`:`<span class="diff-tag diff-green">mejor precio</span>`}
               </td>
             </tr>`;
           }).join('')}
         </tbody>
       </table>
-    </div>
-  `;
+    </div>`;
 }
 
-buildSidebar();
+buildSidebar('catList',false);
+buildSidebar('catListMobile',true);
 </script>
 </body>
 </html>
